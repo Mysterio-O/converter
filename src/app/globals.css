@@ -1,26 +1,97 @@
 @import "tailwindcss";
 
+/* ---------- design tokens (from MediaForge) ---------- */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --bg: #edebe4;
+  --panel: #f7f5ef;
+  --panel-2: #ffffff;
+  --line: #d8d4c8;
+  --text: #1b1d22;
+  --text-dim: #6a6f79;
+  --amber: #f5a623;
+  --teal: #4fd1c5;
+  --danger: #e5674a;
+  --radius: 10px;
 }
 
 @media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+  :root:not([data-theme="light"]) {
+    --bg: #14171c;
+    --panel: #1a1e25;
+    --panel-2: #20242c;
+    --line: #2b3038;
+    --text: #e8e6de;
+    --text-dim: #8b93a1;
   }
 }
 
+:root[data-theme="dark"] {
+  --bg: #14171c;
+  --panel: #1a1e25;
+  --panel-2: #20242c;
+  --line: #2b3038;
+  --text: #e8e6de;
+  --text-dim: #8b93a1;
+}
+
+@theme inline {
+  --color-bg: var(--bg);
+  --color-panel: var(--panel);
+  --color-panel-2: var(--panel-2);
+  --color-line: var(--line);
+  --color-text: var(--text);
+  --color-text-dim: var(--text-dim);
+  --color-amber: var(--amber);
+  --color-teal: var(--teal);
+  --color-danger: var(--danger);
+  --font-sans: var(--font-space-grotesk), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-jetbrains-mono), ui-monospace, monospace;
+}
+
+html {
+  scroll-padding-top: env(safe-area-inset-top, 0px);
+}
+
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* range inputs */
+input[type="range"] {
+  accent-color: var(--amber);
+}
+
+/* hide native file input */
+input[type="file"] {
+  display: none;
+}
+
+/* log scrollbar */
+.log-scroll::-webkit-scrollbar {
+  width: 6px;
+}
+.log-scroll::-webkit-scrollbar-thumb {
+  background: var(--line);
+  border-radius: 99px;
+}
+
+/* pulse for busy engine dot */
+@keyframes engine-pulse {
+  50% {
+    opacity: 0.4;
+  }
+}
+.dot-busy {
+  animation: engine-pulse 1s infinite;
+}
+
+/* safe-area padding helpers */
+.safe-b {
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+}
+.safe-t {
+  padding-top: env(safe-area-inset-top, 0px);
 }
