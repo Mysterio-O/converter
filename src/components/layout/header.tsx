@@ -17,7 +17,7 @@ const dotClass: Record<HeaderProps["engineState"], string> = {
 
 export function Header({ engineLabel, engineState }: HeaderProps) {
   return (
-    <header className="safe-t flex flex-wrap items-center justify-between gap-4 border-b border-line px-4 py-4 sm:px-6">
+    <header className="safe-area-inset-header flex flex-wrap items-center justify-between gap-4 border-b border-line px-4 py-4 sm:px-6">
       <div className="flex items-center gap-3">
         <BrandMark className="h-[30px] w-[30px]" />
         <div>
